@@ -1,5 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import Controller from './screens/Controller';
+
 import './index.css';
 
-ReactDOM.render(<span>Image Viewer</span>, document.getElementById('root'));
+ReactDOM.render(
+  <span>
+    <Controller />
+  </span>,
+  document.getElementById('root')
+);
