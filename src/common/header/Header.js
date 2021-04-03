@@ -8,7 +8,11 @@ class Header extends Component {
   }
 
   render() {
-    return <div className="header">{this.props.header}</div>;
+    return (
+      <header className="header">
+        <div className="logo">{this.props.header}</div>
+      </header>
+    );
   }
 }
 

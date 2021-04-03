@@ -1,3 +1,9 @@
 .header {
   background-color: #263238;
+  padding: 2%;
+}
+
+.logo {
+  color: white;
+  font-size: 18px;
 }
