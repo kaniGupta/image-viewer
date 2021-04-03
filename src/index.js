@@ -5,6 +5,7 @@ import 'fontsource-roboto';
 import Controller from './screens/Controller';
 
 import './index.css';
+import './common/Common.css';
 
 ReactDOM.render(
   <span>
