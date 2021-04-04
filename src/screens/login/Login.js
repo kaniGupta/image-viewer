@@ -16,6 +16,20 @@ import './Login.css';
 
 const user = { username: 'username', password: 'password' };
 
+const appId = 936211227204932;
+const appSecret = 'b467fa1133ff53dad9984b686b1bae3e';
+const redirectUri = 'https://www.upgrad.com/';
+
+const authenticateTestUserUri = `https://api.instagram.com/oauth/authorize?client_id=${appId}&redirect_uri=${redirectUri}&scope=user_profile,user_media&response_type=code`;
+
+const accessTokenUri = `curl -X POST \
+                        https://api.instagram.com/oauth/access_token \
+                        -F client_id=${appId} \
+                        -F client_secret=${appSecret} \
+                        -F grant_type=authorization_code \
+                        -F redirect_uri=${redirectUri} \
+                        -F code={code}`;
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -41,6 +55,11 @@ class Login extends Component {
     this.state.password !== user.password
       ? this.setState({ incorrectUser: 'dispBlock' })
       : this.setState({ incorrectUser: 'dispNone' });
+
+    sessionStorage.setItem(
+      'access-token',
+      'IGQVJVUkRrQTFoejNKVFU4MC1MUHlZAMW0xY0otN1BNLVIxSzVsSkxCX0JJZAXM2YnVTc25PZAy1sUHJ5NjJDYnBsNV9OaFNteUtYY3ZA2eFpnTE1uOUM4ei1QMEJ2bnI1NTNnNnpzeGJfNW5qZAjk4OHg0Vm9lVHUzUHpUVUpR'
+    );
   };
 
   render() {
