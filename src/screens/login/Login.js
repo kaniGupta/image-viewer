@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
+import axios from 'axios';
 import {
   Button,
   Card,
@@ -30,6 +32,9 @@ const accessTokenUri = `curl -X POST \
                         -F redirect_uri=${redirectUri} \
                         -F code={code}`;
 
+const accessToken =
+  'IGQVJWRm9iV2dkTDc3N09VbkM4RV96N3BYR0lFcnNzZAUZA2UGJ4RFp1SDdpazBobnF1QlhzVXQzUlJmc3JWRFhBVWtrZAlQ5VGZA1VS1nVkVocWdnTzQ0WXhNOUZAiMHlEUk5VM1FqbnBvQ1psWS1aSjZAfa3VsVGVOaERRLVBr';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -56,10 +61,13 @@ class Login extends Component {
       ? this.setState({ incorrectUser: 'dispBlock' })
       : this.setState({ incorrectUser: 'dispNone' });
 
-    sessionStorage.setItem(
-      'access-token',
-      'IGQVJVUkRrQTFoejNKVFU4MC1MUHlZAMW0xY0otN1BNLVIxSzVsSkxCX0JJZAXM2YnVTc25PZAy1sUHJ5NjJDYnBsNV9OaFNteUtYY3ZA2eFpnTE1uOUM4ei1QMEJ2bnI1NTNnNnpzeGJfNW5qZAjk4OHg0Vm9lVHUzUHpUVUpR'
-    );
+    if (
+      this.state.username === user.username &&
+      this.state.password === user.password
+    ) {
+      sessionStorage.setItem('access-token', accessToken);
+      this.props.history.push('/home');
+    }
   };
 
   render() {
@@ -122,4 +130,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);
