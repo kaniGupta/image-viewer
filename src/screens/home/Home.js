@@ -1,11 +1,43 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import axios from 'axios';
+import {
+  Avatar,
+  Card,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Typography,
+  withStyles,
+} from '@material-ui/core';
+import { red } from '@material-ui/core/colors';
 
 import Header from '../../common/header/Header';
 
 import './Home.css';
-import { GridList, GridListTile, GridListTileBar } from '@material-ui/core';
+
+const styles = (theme) => ({
+  root: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%',
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
+  avatar: {
+    backgroundColor: red[500],
+  },
+});
 
 class Home extends Component {
   constructor(props) {
@@ -37,7 +69,7 @@ class Home extends Component {
         )
         .then((response) => {
           const instagramDetailedPosts = [...this.state.instagramDetailedPosts];
-          instagramDetailedPosts.push({ [id]: response.data });
+          instagramDetailedPosts.push(response.data);
 
           this.setState({ instagramDetailedPosts });
         })
@@ -52,6 +84,8 @@ class Home extends Component {
   };
 
   render() {
+    const { classes } = this.props;
+
     return (
       <div>
         <Header
@@ -59,9 +93,42 @@ class Home extends Component {
           header="Image Viewer"
           searchBoxHandler={this.searchBoxHandler}
         />
+
+        {this.state.instagramDetailedPosts.map(
+          ({ id, media_url, username, timestamp }, index) => {
+            const captionInfo = this.state.instagramPosts[index];
+
+            return (
+              <Card key={`post-${id}`} className={classes.root}>
+                <CardHeader
+                  avatar={
+                    <Avatar aria-label="recipe" className={classes.avatar}>
+                      DP
+                    </Avatar>
+                  }
+                  title={username}
+                  subheader={timestamp}
+                />
+                <CardMedia
+                  className={classes.media}
+                  image={media_url}
+                  title="Paella dish"
+                />
+                <CardContent>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p">
+                    {captionInfo.caption}
+                  </Typography>
+                </CardContent>
+              </Card>
+            );
+          }
+        )}
       </div>
     );
   }
 }
 
-export default withRouter(Home);
+export default withRouter(withStyles(styles)(Home));
