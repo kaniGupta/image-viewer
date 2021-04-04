@@ -1,0 +1,14 @@
+.header {
+  width: 100%;
+  background-color: #263238;
+  padding: 2%;
+}
+
+.logo {
+  margin-left: 2%;
+}
+
+.logo a {
+  color: white;
+  font-size: 18px;
+}

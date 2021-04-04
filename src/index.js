@@ -1,5 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import 'fontsource-roboto';
 
-ReactDOM.render(<span>Image Viewer</span>, document.getElementById('root'));
+import Controller from './screens/Controller';
+
+import './index.css';
+import './common/Common.css';
+
+ReactDOM.render(
+  <span>
+    <Controller />
+  </span>,
+  document.getElementById('root')
+);
