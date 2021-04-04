@@ -17,9 +17,6 @@ import Header from '../../common/header/Header';
 import './Home.css';
 
 const styles = (theme) => ({
-  root: {
-    maxWidth: 345,
-  },
   media: {
     height: 0,
     paddingTop: '56.25%',
@@ -94,38 +91,40 @@ class Home extends Component {
           searchBoxHandler={this.searchBoxHandler}
         />
 
-        {this.state.instagramDetailedPosts.map(
-          ({ id, media_url, username, timestamp }, index) => {
-            const captionInfo = this.state.instagramPosts[index];
+        <div className="posts-grid">
+          {this.state.instagramDetailedPosts.map(
+            ({ id, media_url, username, timestamp }, index) => {
+              const captionInfo = this.state.instagramPosts[index];
 
-            return (
-              <Card key={`post-${id}`} className={classes.root}>
-                <CardHeader
-                  avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                      DP
-                    </Avatar>
-                  }
-                  title={username}
-                  subheader={timestamp}
-                />
-                <CardMedia
-                  className={classes.media}
-                  image={media_url}
-                  title="Paella dish"
-                />
-                <CardContent>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="p">
-                    {captionInfo.caption}
-                  </Typography>
-                </CardContent>
-              </Card>
-            );
-          }
-        )}
+              return (
+                <Card key={`post-${id}`} className="post-card">
+                  <CardHeader
+                    avatar={
+                      <Avatar aria-label="recipe" className={classes.avatar}>
+                        DP
+                      </Avatar>
+                    }
+                    title={username}
+                    subheader={timestamp}
+                  />
+                  <CardMedia
+                    className={classes.media}
+                    image={media_url}
+                    title="Paella dish"
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p">
+                      {captionInfo.caption}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              );
+            }
+          )}
+        </div>
       </div>
     );
   }
