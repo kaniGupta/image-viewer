@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import axios from 'axios';
 import {
   Button,
   Card,
@@ -18,22 +17,8 @@ import './Login.css';
 
 const user = { username: 'username', password: 'password' };
 
-const appId = 936211227204932;
-const appSecret = 'b467fa1133ff53dad9984b686b1bae3e';
-const redirectUri = 'https://www.upgrad.com/';
-
-const authenticateTestUserUri = `https://api.instagram.com/oauth/authorize?client_id=${appId}&redirect_uri=${redirectUri}&scope=user_profile,user_media&response_type=code`;
-
-const accessTokenUri = `curl -X POST \
-                        https://api.instagram.com/oauth/access_token \
-                        -F client_id=${appId} \
-                        -F client_secret=${appSecret} \
-                        -F grant_type=authorization_code \
-                        -F redirect_uri=${redirectUri} \
-                        -F code={code}`;
-
 const accessToken =
-  'IGQVJWRm9iV2dkTDc3N09VbkM4RV96N3BYR0lFcnNzZAUZA2UGJ4RFp1SDdpazBobnF1QlhzVXQzUlJmc3JWRFhBVWtrZAlQ5VGZA1VS1nVkVocWdnTzQ0WXhNOUZAiMHlEUk5VM1FqbnBvQ1psWS1aSjZAfa3VsVGVOaERRLVBr';
+  'IGQVJVa0p3cVlrQ0twUWZAZAc2VmbTA2SDFUVGhwYTdYY0VQVjdNdDdGTWdHRmNXN2ozZAXZAKYUdMX0tXQWFQR2M0dy1hYmY3NWJObGxWcWZARNWd1QnR2N1M0dUN5WmU0VWUtUXlDQl9HT212TVhuOFhDelFhTHZAKWHduX0FV';
 
 class Login extends Component {
   constructor(props) {
