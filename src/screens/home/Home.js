@@ -5,11 +5,16 @@ import axios from 'axios';
 import Header from '../../common/header/Header';
 
 import './Home.css';
+import { GridList, GridListTile, GridListTileBar } from '@material-ui/core';
 
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { instagramPosts: [], instagramDetailedPosts: [] };
+    this.state = {
+      instagramPosts: [],
+      instagramDetailedPosts: [],
+      searchText: '',
+    };
   }
 
   async componentDidMount() {
@@ -31,7 +36,6 @@ class Home extends Component {
           )}`
         )
         .then((response) => {
-          console.log(response.data);
           const instagramDetailedPosts = [...this.state.instagramDetailedPosts];
           instagramDetailedPosts.push({ [id]: response.data });
 
@@ -43,11 +47,18 @@ class Home extends Component {
     });
   }
 
+  searchBoxHandler = (event) => {
+    this.setState({ searchText: event.target.value });
+  };
+
   render() {
     return (
       <div>
-        <Header header="Image Viewer" />
-        Home
+        <Header
+          searchBox
+          header="Image Viewer"
+          searchBoxHandler={this.searchBoxHandler}
+        />
       </div>
     );
   }

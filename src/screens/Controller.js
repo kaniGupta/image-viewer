@@ -11,9 +11,6 @@ class Controller extends Component {
         <div>
           <Switch>
             <Route exact path="/" render={() => <Login />} />
-            {sessionStorage.getItem('access-token') == null ? (
-              <Route exact path="/" render={() => <Login />} />
-            ) : null}
             <Route exact path="/home" render={() => <Home />} />
           </Switch>
         </div>
