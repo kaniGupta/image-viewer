@@ -31,11 +31,33 @@ class Header extends Component {
   };
 
   render() {
+    const avatar = (
+      <React.Fragment>
+        <Avatar
+          className="header-avatar"
+          aria-label="recipe"
+          src={this.props.profilePicture}
+          onClick={this.handleClick}
+        />
+        <Menu
+          id="simple-menu"
+          anchorEl={this.state.anchorEl}
+          keepMounted
+          open={Boolean(this.state.anchorEl)}
+          onClose={this.handleClose}>
+          {this.props.searchBox ? (
+            <MenuItem onClick={this.handleProfile}>My Account</MenuItem>
+          ) : null}
+          <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+        </Menu>
+      </React.Fragment>
+    );
     return (
       <header className="header">
         <div className="logo">
-          <Link to="/">{this.props.header}</Link>
+          <p>{this.props.header}</p>
         </div>
+        {this.props.profileBox && avatar}
         {this.props.searchBox && (
           <div className="search-box">
             <input
@@ -45,21 +67,7 @@ class Header extends Component {
               placeholder="Search..."
               onChange={this.props.searchBoxHandler}
             />
-            <Avatar
-              className="header-avatar"
-              aria-label="recipe"
-              src={this.props.profilePicture}
-              onClick={this.handleClick}
-            />
-            <Menu
-              id="simple-menu"
-              anchorEl={this.state.anchorEl}
-              keepMounted
-              open={Boolean(this.state.anchorEl)}
-              onClose={this.handleClose}>
-              <MenuItem onClick={this.handleProfile}>My Account</MenuItem>
-              <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
-            </Menu>
+            {avatar}
           </div>
         )}
       </header>
