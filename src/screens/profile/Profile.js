@@ -30,6 +30,7 @@ class Profile extends Component {
         instagramPosts: instagramApiResponse.data.data,
         profilePicture: instagramApiResponse.data.data[0].media_url,
         username: instagramApiResponse.data.data[0].username,
+        fullName: 'UpGrad Education',
       });
     }
   }
@@ -46,7 +47,7 @@ class Profile extends Component {
         <section id="user-details-section">
           <img
             src={this.state.profilePicture}
-            alt="Display Picture"
+            alt="Display"
             className="user-details-picture"
           />
           <div className="user-details">
@@ -54,20 +55,14 @@ class Profile extends Component {
               {this.state.username}
             </Typography>
             <div className="user-follow-details">
-              <Typography variant="body2" component="body2">
+              <Typography variant="body2">
                 Posts: {this.state.instagramPosts.length}
               </Typography>
-              <Typography variant="body2" component="body2">
-                Follow: 4
-              </Typography>
-              <Typography variant="body2" component="body2">
-                Followed By: 6
-              </Typography>
+              <Typography variant="body2">Follow: 4</Typography>
+              <Typography variant="body2">Followed By: 6</Typography>
             </div>
 
-            <Typography variant="body1" component="body1">
-              UpGrad Education
-            </Typography>
+            <Typography variant="body1">{this.state.fullName}</Typography>
           </div>
         </section>
         <section id="user-posts"></section>
