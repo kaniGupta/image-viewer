@@ -1,3 +1,4 @@
+import { Avatar } from '@material-ui/core';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -18,6 +19,11 @@ class Header extends Component {
               id="search"
               placeholder="Search..."
               onChange={this.props.searchBoxHandler}
+            />
+            <Avatar
+              className="header-avatar"
+              aria-label="recipe"
+              src={this.props.profilePicture}
             />
           </div>
         )}

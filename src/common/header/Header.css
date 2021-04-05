@@ -18,7 +18,12 @@
 }
 
 .search-box {
+  width: 30%;
   margin-right: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .search-box input {
@@ -29,4 +34,8 @@
   width: 300px;
   box-sizing: border-box;
   padding: 8px 12px;
+}
+
+.header-avatar {
+  cursor: pointer;
 }

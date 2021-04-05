@@ -45,7 +45,6 @@ class Home extends Component {
     );
 
     if (instagramApiResponse.data) {
-      console.log(instagramApiResponse.data.data);
       this.setState({
         instagramPosts: instagramApiResponse.data.data,
         profilePicture: instagramApiResponse.data.data[0].media_url,
@@ -66,6 +65,7 @@ class Home extends Component {
           searchBox
           header="Image Viewer"
           searchBoxHandler={this.searchBoxHandler}
+          profilePicture={this.state.profilePicture}
         />
 
         <div className="posts-grid">
