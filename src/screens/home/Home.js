@@ -33,11 +33,6 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-    console.log(
-      `https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp,username&access_token=${sessionStorage.getItem(
-        'access-token'
-      )}`
-    );
     const instagramApiResponse = await axios.get(
       `https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp,username&access_token=${sessionStorage.getItem(
         'access-token'

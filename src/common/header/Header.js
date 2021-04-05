@@ -1,16 +1,62 @@
-import { Avatar } from '@material-ui/core';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { Avatar, Menu, MenuItem } from '@material-ui/core';
 
 import './Header.css';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { anchorEl: null };
+  }
+
+  handleClick = (event) => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  handleProfile = () => {
+    this.handleClose();
+    this.props.history.push('/profile');
+  };
+
+  handleLogout = () => {
+    this.handleClose();
+    sessionStorage.removeItem('access-token');
+    this.props.history.push('/');
+  };
+
   render() {
+    const avatar = (
+      <React.Fragment>
+        <Avatar
+          className="header-avatar"
+          aria-label="recipe"
+          src={this.props.profilePicture}
+          onClick={this.handleClick}
+        />
+        <Menu
+          id="simple-menu"
+          anchorEl={this.state.anchorEl}
+          keepMounted
+          open={Boolean(this.state.anchorEl)}
+          onClose={this.handleClose}>
+          {this.props.searchBox ? (
+            <MenuItem onClick={this.handleProfile}>My Account</MenuItem>
+          ) : null}
+          <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+        </Menu>
+      </React.Fragment>
+    );
     return (
       <header className="header">
         <div className="logo">
-          <Link to="/">{this.props.header}</Link>
+          <p>{this.props.header}</p>
         </div>
+        {this.props.profileBox && avatar}
         {this.props.searchBox && (
           <div className="search-box">
             <input
@@ -20,11 +66,7 @@ class Header extends Component {
               placeholder="Search..."
               onChange={this.props.searchBoxHandler}
             />
-            <Avatar
-              className="header-avatar"
-              aria-label="recipe"
-              src={this.props.profilePicture}
-            />
+            {avatar}
           </div>
         )}
       </header>
@@ -32,4 +74,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);
