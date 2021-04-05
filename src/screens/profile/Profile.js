@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { GridList, GridListTile, Typography } from '@material-ui/core';
 
 import Header from '../../common/header/Header';
 
 import './Profile.css';
-import { Typography } from '@material-ui/core';
 
 class Profile extends Component {
   constructor(props) {
@@ -65,7 +65,17 @@ class Profile extends Component {
             <Typography variant="body1">{this.state.fullName}</Typography>
           </div>
         </section>
-        <section id="user-posts"></section>
+        <section id="user-posts">
+          {this.state.instagramPosts && (
+            <GridList cellHeight={350} cols={3}>
+              {this.state.instagramPosts.map(({ id, caption, media_url }) => (
+                <GridListTile key={`grid${id}`}>
+                  <img src={media_url} alt={`InstagramPost${caption}`} />
+                </GridListTile>
+              ))}
+            </GridList>
+          )}
+        </section>
       </div>
     );
   }
