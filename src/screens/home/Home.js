@@ -44,19 +44,18 @@ class Home extends Component {
     super(props);
     this.state = {
       instagramPosts: [],
-      instagramDetailedPosts: [],
       searchText: '',
     };
   }
 
   async componentDidMount() {
     console.log(
-      `https://graph.instagram.com/me/media?fields=id,caption&access_token=${sessionStorage.getItem(
+      `https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp,username&access_token=${sessionStorage.getItem(
         'access-token'
       )}`
     );
     const instagramApiResponse = await axios.get(
-      `https://graph.instagram.com/me/media?fields=id,caption&access_token=${sessionStorage.getItem(
+      `https://graph.instagram.com/me/media?fields=id,caption,media_url,timestamp,username&access_token=${sessionStorage.getItem(
         'access-token'
       )}`
     );
@@ -64,24 +63,6 @@ class Home extends Component {
     if (instagramApiResponse.data) {
       this.setState({ instagramPosts: instagramApiResponse.data.data });
     }
-
-    this.state.instagramPosts.forEach(({ id }) => {
-      axios
-        .get(
-          `https://graph.instagram.com/${id}?fields=id,media_type,media_url,username,timestamp&access_token=${sessionStorage.getItem(
-            'access-token'
-          )}`
-        )
-        .then((response) => {
-          const instagramDetailedPosts = [...this.state.instagramDetailedPosts];
-          instagramDetailedPosts.push(response.data);
-
-          this.setState({ instagramDetailedPosts });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
   }
 
   searchBoxHandler = (event) => {
@@ -100,10 +81,8 @@ class Home extends Component {
         />
 
         <div className="posts-grid">
-          {this.state.instagramDetailedPosts.map(
-            ({ id, media_url, username, timestamp }, index) => {
-              const captionInfo = this.state.instagramPosts[index];
-
+          {this.state.instagramPosts.map(
+            ({ id, caption, media_url, timestamp, username }, index) => {
               return (
                 <Card key={`post-${id}`} className="post-card">
                   <CardHeader
@@ -125,7 +104,7 @@ class Home extends Component {
                       variant="body2"
                       color="textSecondary"
                       component="p">
-                      {captionInfo.caption}
+                      {caption}
                     </Typography>
                   </CardContent>
                   <CardActions disableSpacing>
