@@ -1,0 +1,31 @@
+#user-details-section {
+  margin-top: 20px;
+  padding: 20px 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.user-details-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+}
+
+.user-details {
+  height: 100%;
+  width: 50%;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.user-follow-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
