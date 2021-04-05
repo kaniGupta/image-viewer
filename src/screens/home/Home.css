@@ -11,3 +11,7 @@
   width: 75%;
   cursor: pointer;
 }
+
+.avatar-pic {
+  z-index: 100;
+}

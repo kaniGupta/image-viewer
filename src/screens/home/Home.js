@@ -12,31 +12,14 @@ import {
   Typography,
   withStyles,
 } from '@material-ui/core';
-import { red } from '@material-ui/core/colors';
 import FavoriteBorderOutlined from '@material-ui/icons/FavoriteBorderOutlined';
 
 import Header from '../../common/header/Header';
 
 import './Home.css';
 
-const styles = (theme) => ({
-  media: {
-    height: 0,
-    paddingTop: '56.25%',
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
+const styles = () => ({
+  media: { height: 0, paddingTop: '56.25%' },
 });
 
 class Home extends Component {
@@ -44,6 +27,7 @@ class Home extends Component {
     super(props);
     this.state = {
       instagramPosts: [],
+      profilePicture: null,
       searchText: '',
     };
   }
@@ -61,7 +45,11 @@ class Home extends Component {
     );
 
     if (instagramApiResponse.data) {
-      this.setState({ instagramPosts: instagramApiResponse.data.data });
+      console.log(instagramApiResponse.data.data);
+      this.setState({
+        instagramPosts: instagramApiResponse.data.data,
+        profilePicture: instagramApiResponse.data.data[0].media_url,
+      });
     }
   }
 
@@ -82,14 +70,15 @@ class Home extends Component {
 
         <div className="posts-grid">
           {this.state.instagramPosts.map(
-            ({ id, caption, media_url, timestamp, username }, index) => {
+            ({ id, caption, media_url, timestamp, username }) => {
               return (
                 <Card key={`post-${id}`} className="post-card">
                   <CardHeader
                     avatar={
-                      <Avatar aria-label="recipe" className={classes.avatar}>
-                        DP
-                      </Avatar>
+                      <Avatar
+                        aria-label="recipe"
+                        src={this.state.profilePicture}
+                      />
                     }
                     title={username}
                     subheader={timestamp}
@@ -97,7 +86,7 @@ class Home extends Component {
                   <CardMedia
                     className={classes.media}
                     image={media_url}
-                    title="Paella dish"
+                    title={`Instagram-Post${caption}`}
                   />
                   <CardContent>
                     <Typography
