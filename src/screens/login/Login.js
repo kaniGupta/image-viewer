@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import {
   Button,
   Card,
@@ -16,19 +17,8 @@ import './Login.css';
 
 const user = { username: 'username', password: 'password' };
 
-const appId = 936211227204932;
-const appSecret = 'b467fa1133ff53dad9984b686b1bae3e';
-const redirectUri = 'https://www.upgrad.com/';
-
-const authenticateTestUserUri = `https://api.instagram.com/oauth/authorize?client_id=${appId}&redirect_uri=${redirectUri}&scope=user_profile,user_media&response_type=code`;
-
-const accessTokenUri = `curl -X POST \
-                        https://api.instagram.com/oauth/access_token \
-                        -F client_id=${appId} \
-                        -F client_secret=${appSecret} \
-                        -F grant_type=authorization_code \
-                        -F redirect_uri=${redirectUri} \
-                        -F code={code}`;
+const accessToken =
+  'IGQVJYSEdzUS1QcnVTSUhFNDZAoT0w4NVkwQ296a1VkU3lWbmVKbHoxNzVobVZAiaGxwYlRRRXVoeFlEd1hUUTZAqWGhaU0ZAScDFwYVdXTmdrY0pwaHp6MGxpeU9hVVBrZAkNFbUtQQkkxbXNUWXB1UUZAoeWZAURHdfYmNBQWdv';
 
 class Login extends Component {
   constructor(props) {
@@ -56,10 +46,13 @@ class Login extends Component {
       ? this.setState({ incorrectUser: 'dispBlock' })
       : this.setState({ incorrectUser: 'dispNone' });
 
-    sessionStorage.setItem(
-      'access-token',
-      'IGQVJVUkRrQTFoejNKVFU4MC1MUHlZAMW0xY0otN1BNLVIxSzVsSkxCX0JJZAXM2YnVTc25PZAy1sUHJ5NjJDYnBsNV9OaFNteUtYY3ZA2eFpnTE1uOUM4ei1QMEJ2bnI1NTNnNnpzeGJfNW5qZAjk4OHg0Vm9lVHUzUHpUVUpR'
-    );
+    if (
+      this.state.username === user.username &&
+      this.state.password === user.password
+    ) {
+      sessionStorage.setItem('access-token', accessToken);
+      this.props.history.push('/home');
+    }
   };
 
   render() {
@@ -122,4 +115,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);
