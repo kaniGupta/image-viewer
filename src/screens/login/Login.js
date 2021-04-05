@@ -18,7 +18,7 @@ import './Login.css';
 const user = { username: 'username', password: 'password' };
 
 const accessToken =
-  'IGQVJXdlBWQ2hYRi1fRFVzU1pnQklScjlFRUI5Uk1QM2lfbXoyaWstdFZAPOXlVemFVUjZAYNUVzQjVjN19QYk1ONVNxVVo0Y01HQjRFdldUNDlqMVh3NkdWM2RydWRRVUFnWjJXUEtmaGF2QkZABLVpsRDFmSk9EQlZASRmZAz';
+  'IGQVJYSEdzUS1QcnVTSUhFNDZAoT0w4NVkwQ296a1VkU3lWbmVKbHoxNzVobVZAiaGxwYlRRRXVoeFlEd1hUUTZAqWGhaU0ZAScDFwYVdXTmdrY0pwaHp6MGxpeU9hVVBrZAkNFbUtQQkkxbXNUWXB1UUZAoeWZAURHdfYmNBQWdv';
 
 class Login extends Component {
   constructor(props) {

@@ -4,13 +4,16 @@ import axios from 'axios';
 import {
   Avatar,
   Card,
+  CardActions,
   CardContent,
   CardHeader,
   CardMedia,
+  IconButton,
   Typography,
   withStyles,
 } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
+import FavoriteBorderOutlined from '@material-ui/icons/FavoriteBorderOutlined';
 
 import Header from '../../common/header/Header';
 
@@ -47,6 +50,11 @@ class Home extends Component {
   }
 
   async componentDidMount() {
+    console.log(
+      `https://graph.instagram.com/me/media?fields=id,caption&access_token=${sessionStorage.getItem(
+        'access-token'
+      )}`
+    );
     const instagramApiResponse = await axios.get(
       `https://graph.instagram.com/me/media?fields=id,caption&access_token=${sessionStorage.getItem(
         'access-token'
@@ -120,6 +128,17 @@ class Home extends Component {
                       {captionInfo.caption}
                     </Typography>
                   </CardContent>
+                  <CardActions disableSpacing>
+                    <IconButton aria-label="add to favorites">
+                      <FavoriteBorderOutlined />
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p">
+                        &nbsp; 2 likes
+                      </Typography>
+                    </IconButton>
+                  </CardActions>
                 </Card>
               );
             }
